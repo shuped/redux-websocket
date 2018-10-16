@@ -2,10 +2,10 @@ node_modules
 coverage
 *.log
 lib
-dist
 # IntelliJ
 *.iml
 .idea
 # Apple
 .DS_Store
 yarn.lock
+node_modules
