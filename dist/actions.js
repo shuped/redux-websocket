@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.message = exports.closed = exports.open = exports.connecting = undefined;
 
-var _index = require('./index');
+var _index = require("./index");
 
 // These actions are more concerned with connection state
 // and are trigged async by the WebSocketMiddleware
@@ -42,6 +42,7 @@ var closed = exports.closed = function closed(event) {
 };
 
 var message = exports.message = function message(event) {
+  var data = JSON.parse(event.data);
   return {
     type: _index.WEBSOCKET_MESSAGE,
     payload: JSON.stringify({

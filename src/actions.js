@@ -1,6 +1,11 @@
 /* eslint-env browser */
 // @flow
-import { WEBSOCKET_CONNECTING, WEBSOCKET_OPEN, WEBSOCKET_CLOSED, WEBSOCKET_MESSAGE } from './index';
+import {
+  WEBSOCKET_CONNECTING,
+  WEBSOCKET_OPEN,
+  WEBSOCKET_CLOSED,
+  WEBSOCKET_MESSAGE
+} from "./index";
 
 // These actions are more concerned with connection state
 // and are trigged async by the WebSocketMiddleware
@@ -30,16 +35,15 @@ export const closed = (event: Event): Action => ({
   }
 });
 
-export const message = (event: MessageEvent): Action => ({
-  type: WEBSOCKET_MESSAGE,
-  payload: JSON.stringify({
+export const message = (event: MessageEvent): Action => {
+  const data = JSON.parse(event.data);
+  return {
+    type: WEBSOCKET_MESSAGE,
+    payload: JSON.stringify({
       type: data.type,
-      payload: Object.assign(
-        {timestamp: new Date()},
-        data.payload,
-        event
-      )
+      payload: Object.assign({ timestamp: new Date() }, data.payload, event)
     })
-});
+  };
+};
 
 export default {};
