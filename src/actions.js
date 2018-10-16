@@ -32,11 +32,14 @@ export const closed = (event: Event): Action => ({
 
 export const message = (event: MessageEvent): Action => ({
   type: WEBSOCKET_MESSAGE,
-  payload: {
-    timestamp: new Date(),
-    data: event.data,
-    event
-  }
+  payload: JSON.stringify({
+      type: data.type,
+      payload: Object.assign(
+        {timestamp: new Date()},
+        data.payload,
+        event
+      )
+    })
 });
 
 export default {};
